@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SyftChallenge</string>
+    <string name="filter">FILTERS</string>
+    <string name="search">Search</string>
+    <string name="hits">%1$s hits</string>
+    <string name="no_results">No results</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="Languages">Languages</string>
+    <string name="javascript">JavaScript</string>
+    <string name="assembly">Assembly</string>
+    <string name="c">C++</string>
+    <string name="apply">Apply</string>
+</resources>
