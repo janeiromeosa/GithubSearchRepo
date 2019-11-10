@@ -41,7 +41,7 @@ class SearchActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "This item was clicked", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@SearchActivity, FilterActivity::class.java)
-            intent.putExtra("selected", language)
+            intent.putExtra("selected_lan", language)
             this@SearchActivity.startActivityForResult(intent, returnCode)
         }
     }
@@ -67,6 +67,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun getObservableStates() {
+
         searchViewModel.getSearchResultsObservable().observe(this, Observer {
             if (it.totalCount == 0) {
                 tv_statistics.text = getString(R.string.no_results)
@@ -105,7 +106,7 @@ class SearchActivity : AppCompatActivity() {
             resultCode -> {
                 if (resultCode == Activity.RESULT_OK) {
 
-                    language = data?.getStringExtra("selected")?:""
+                    language = data?.getStringExtra("selected_apply")?:""
 
                     if(et_search.text.toString() == ""){
                         searchViewModel.getSearchResults(language = language)

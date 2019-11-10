@@ -15,6 +15,6 @@ data class Item(
     @SerializedName("has_pages")
     val hasPages: Boolean,
     @SerializedName("description")
-    val description: Any
+    val description: String
 
 )

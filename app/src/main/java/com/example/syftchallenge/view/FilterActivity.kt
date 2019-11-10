@@ -14,7 +14,6 @@ class FilterActivity : AppCompatActivity() {
 
     @Inject
     lateinit var searchViewModel: SearchViewModel
-//    lateinit var filterAdapter: FilterAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +31,13 @@ class FilterActivity : AppCompatActivity() {
                 "C++",
                 "JavaScript",
                 "Assembly",
-                "Java"), intent?.getStringExtra("selected")?: ""
+                "Java"), intent?.getStringExtra("selected_lan")?: ""
         )
         rv_filter.adapter = filterAdapter
 
         btn_apply.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("selected", filterAdapter.selectedLanguage)
+            intent.putExtra("selected_apply", filterAdapter.selectedLanguage)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
