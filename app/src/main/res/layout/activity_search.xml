@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/eT_search"
+        android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_margin_start"
@@ -28,10 +28,10 @@
         android:layout_marginEnd="@dimen/tv_margin_end"
         android:text="@string/filter"
         android:textColor="@color/filter_tv_colour"
-        app:layout_constraintBottom_toBottomOf="@id/eT_search"
+        app:layout_constraintBottom_toBottomOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/eT_search"
-        app:layout_constraintTop_toTopOf="@id/eT_search" />
+        app:layout_constraintStart_toEndOf="@+id/et_search"
+        app:layout_constraintTop_toTopOf="@id/et_search" />
 
     <TextView
         android:id="@+id/tv_statistics"
@@ -42,7 +42,7 @@
         android:padding="@dimen/tv_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eT_search"
+        app:layout_constraintTop_toBottomOf="@+id/et_search"
         tools:text="10000 hits" />
 
     <androidx.recyclerview.widget.RecyclerView

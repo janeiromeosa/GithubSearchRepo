@@ -10,22 +10,30 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private val searchResultObservable: MutableLiveData<SearchResponse> = MutableLiveData()
-    private val errorObservable:MutableLiveData<String> = MutableLiveData()
+    private val errorObservable: MutableLiveData<String> = MutableLiveData()
     private val compositeDisposable = CompositeDisposable()
 
-    fun getSearchResults(searchKeyWord: String) {
+    fun getSearchResults(searchKeyWord: String = "org:github", language: String = "") {
         compositeDisposable.add(
-            repository.getSearchResults(searchKeyWord, SORT_BY)
+            repository.getSearchResults(
+                searchKeyWord + if (language != "") {
+                    " language:$language"
+                } else {
+                    ""
+                }, SORT_BY
+            )
                 .doOnSubscribe { }
                 .doOnError { }
-                .subscribe({ results -> searchResultObservable.value = results }, {error -> errorObservable.value = error.message})
+                .subscribe(
+                    { results -> searchResultObservable.value = results },
+                    { error -> errorObservable.value = error.message })
         )
     }
 
     fun getSearchResultsObservable() = searchResultObservable
     fun getErrorObservable() = errorObservable
 
-    companion object{
+    companion object {
         const val SORT_BY = "stars"
     }
 

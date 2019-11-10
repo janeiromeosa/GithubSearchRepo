@@ -17,15 +17,13 @@ import com.example.syftchallenge.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-private const val returnCode = 1001
-
-
 class SearchActivity : AppCompatActivity() {
 
     @Inject
     lateinit var searchViewModel: SearchViewModel
     lateinit var searchAdapter: SearchAdapter
-    var languages: String = ""
+    private val returnCode = 1001
+    var language: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +41,7 @@ class SearchActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "This item was clicked", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@SearchActivity, FilterActivity::class.java)
+            intent.putExtra("selected", language)
             this@SearchActivity.startActivityForResult(intent, returnCode)
         }
     }
@@ -92,12 +91,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun textChangedSearchResults() {
-        eT_search.doOnTextChanged { text, _, _, _ ->
+        et_search.doOnTextChanged { text, _, _, _ ->
             if (text.toString().isEmpty()) {
                 resetData()
                 return@doOnTextChanged
             }
-            searchViewModel.getSearchResults(text.toString())
+            searchViewModel.getSearchResults(text.toString(), language)
         }
     }
 
@@ -106,8 +105,14 @@ class SearchActivity : AppCompatActivity() {
             resultCode -> {
                 if (resultCode == Activity.RESULT_OK) {
 
-                    languages = data?.getStringExtra("selected")?:""
-//                    searchViewModel.getSearchResults(eT_search.text)
+                    language = data?.getStringExtra("selected")?:""
+
+                    if(et_search.text.toString() == ""){
+                        searchViewModel.getSearchResults(language = language)
+                    }else{
+                        searchViewModel.getSearchResults(et_search.text.toString(), language)
+                    }
+
                 }
             }
             else -> {
