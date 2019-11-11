@@ -22,12 +22,12 @@ class SearchAdapter(val itemsList: MutableList<Item>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemsList[position]
 
-        holder.tvName.text = item.name
+        holder.tvDescription.text = item.description
     }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val tvName: TextView = itemView.tv_item
+        val tvDescription: TextView = itemView.tv_item
     }
 }
