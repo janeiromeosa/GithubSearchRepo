@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.syftchallenge.model.Item
 import com.example.syftchallenge.model.SearchResponse
 import com.example.syftchallenge.repository.Repository
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -47,15 +48,23 @@ class SearchViewModelTest {
     fun searchReturnsResult(){
 
         val searchResponse = SearchResponse(1,false, mutableListOf(item))
-        val searchKeyWord = "Android"
-        val sortBy = "stars"
 
-        `when`(repository.getSearchResults(searchKeyWord, sortBy)).thenReturn(Single.just(searchResponse))
+        `when`(repository.getSearchResults(any(), any())).thenReturn(Single.just(searchResponse))
 
-        viewModel.getSearchResults(searchKeyWord)
+        viewModel.getSearchResults("test")
 
         verify(searchResultObserver, times(1)).onChanged(searchResponse)
-        verify(errorObserver, times(0)).onChanged(ArgumentMatchers.anyString())
+        verify(errorObserver, times(0)).onChanged(any())
+    }
+    @Test
+    fun searchReturnsError(){
+
+        `when`(repository.getSearchResults(any(), any())).thenReturn(Single.error(RuntimeException("Test Error")))
+
+        viewModel.getSearchResults("test")
+
+        verify(searchResultObserver, times(0)).onChanged(any())
+        verify(errorObserver, times(1)).onChanged("Test Error")
     }
 
 }

@@ -21,12 +21,9 @@ class SearchViewModel @Inject constructor(private val repository: Repository) : 
                 } else {
                     ""
                 }, SORT_BY
-            )
-                .doOnSubscribe { }
-                .doOnError { }
-                .subscribe(
-                    { results -> searchResultObservable.value = results },
-                    { error -> errorObservable.value = error.message })
+            ).subscribe(
+                { results -> searchResultObservable.value = results },
+                { error -> errorObservable.value = error.message })
         )
     }
 
