@@ -1,4 +1,4 @@
-package com.example.syftchallenge.di.search
+package com.example.syftchallenge.di.filter
 
 import javax.inject.Scope
 

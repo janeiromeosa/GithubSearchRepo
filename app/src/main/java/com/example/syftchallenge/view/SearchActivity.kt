@@ -36,9 +36,8 @@ class SearchActivity : AppCompatActivity() {
         setFilterClickListener()
     }
 
-    fun setFilterClickListener() {
+    private fun setFilterClickListener() {
         tv_filter.setOnClickListener {
-            Toast.makeText(applicationContext, "This item was clicked", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@SearchActivity, FilterActivity::class.java)
             intent.putExtra("selected_lan", language)

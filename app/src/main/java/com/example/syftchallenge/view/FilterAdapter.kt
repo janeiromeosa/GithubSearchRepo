@@ -8,10 +8,10 @@ import com.example.syftchallenge.R
 import kotlinx.android.synthetic.main.item_filter.view.*
 
 class FilterAdapter(val languageList: List<String>, var selectedLanguage: String) :
-    RecyclerView.Adapter<FilterAdapter.FilterViewHoldler>() {
+    RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHoldler {
-        return FilterViewHoldler(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
+        return FilterViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_filter,
                 parent,
@@ -22,14 +22,14 @@ class FilterAdapter(val languageList: List<String>, var selectedLanguage: String
 
     override fun getItemCount() = languageList.size
 
-    override fun onBindViewHolder(holder: FilterViewHoldler, position: Int) {
+    override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
         holder.bind(languageList[holder.adapterPosition], selectedLanguage) { isSelected ->
             selectedLanguage = isSelected
             notifyDataSetChanged()
         }
     }
 
-    class FilterViewHoldler(val view: View) : RecyclerView.ViewHolder(view) {
+    class FilterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(
             language: String,
